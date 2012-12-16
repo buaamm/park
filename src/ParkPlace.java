@@ -4,6 +4,8 @@ import java.util.Map;
 public class ParkPlace implements Park {
 	private Map<Ticket, Car> parkedCarList = new HashMap<Ticket, Car>();
 	private Integer maxParkingNum;
+	
+	private int id;
 
 	public Integer getAvailableNum() {
 		return maxParkingNum - parkedCarList.size();
@@ -13,7 +15,7 @@ public class ParkPlace implements Park {
 		return getAvailableNum() / this.maxParkingNum;
 	}
 
-	public ParkPlace(int maxParkingNum) {
+	public ParkPlace(int id, int maxParkingNum) {
 		this.maxParkingNum = maxParkingNum;
 	}
 

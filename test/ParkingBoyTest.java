@@ -14,7 +14,7 @@ public class ParkingBoyTest {
 	@Test
 	public void parkPlace_Parking_HavePlace() {
 
-		this.parkingBoy.addParkPlace(new ParkPlace(20));
+		this.parkingBoy.addParkPlace(new ParkPlace(1,20));
 		Car C = new Car();
 		Ticket proof = this.parkingBoy.parking(C);
 		Assert.assertNotNull(proof);
@@ -23,8 +23,8 @@ public class ParkingBoyTest {
 	@Test(expected = NoPlaceException.class)
 	public void parkPlace_Parking_NoPlace() {
 
-		this.parkingBoy.addParkPlace(new ParkPlace(1));
-		this.parkingBoy.addParkPlace(new ParkPlace(1));
+		this.parkingBoy.addParkPlace(new ParkPlace(1,1));
+		this.parkingBoy.addParkPlace(new ParkPlace(1,1));
 
 		this.parkingBoy.parking(new Car());
 		this.parkingBoy.parking(new Car());
@@ -36,7 +36,7 @@ public class ParkingBoyTest {
 	@Test
 	public void parkPlace_GetCar() {
 
-		this.parkingBoy.addParkPlace(new ParkPlace(20));
+		this.parkingBoy.addParkPlace(new ParkPlace(1,20));
 		Car car = new Car();
 		Ticket proof = this.parkingBoy.parking(car);
 
@@ -47,7 +47,7 @@ public class ParkingBoyTest {
 	@Test(expected = NoCarException.class)
 	public void parkPlace_GetCar_NoThisCar() {
 
-		this.parkingBoy.addParkPlace(new ParkPlace(20));
+		this.parkingBoy.addParkPlace( new ParkPlace(1,20));
 		Ticket proof = this.parkingBoy.parking(new Car());
 		this.parkingBoy.getParkedCar(proof);
 
@@ -57,8 +57,8 @@ public class ParkingBoyTest {
 
 	@Test
 	public void parkPlace_ShowAvailableNum() {
-		this.parkingBoy.addParkPlace(new ParkPlace(1));
-		this.parkingBoy.addParkPlace(new ParkPlace(1));
+		this.parkingBoy.addParkPlace( new ParkPlace(1,1));
+		this.parkingBoy.addParkPlace( new ParkPlace(1,1));
 
 		this.parkingBoy.parking(new Car());
 		Assert.assertEquals(Integer.valueOf(1),
