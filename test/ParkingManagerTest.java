@@ -19,7 +19,7 @@ public class ParkingManagerTest {
 		parkingBoy1.addParkPlace(new ParkPlace(3, 10));
 		parkingBoy1.addParkPlace(new ParkPlace(4, 10));
 		this.parkingManager.addParkBoy(parkingBoy1);
-		
+
 		ParkingBoy parkingBoy2 = new ParkingBoy();
 		parkingBoy2.addParkPlace(new ParkPlace(5, 20));
 		parkingBoy2.addParkPlace(new ParkPlace(6, 10));
@@ -72,6 +72,39 @@ public class ParkingManagerTest {
 		this.parkingManager.parking(new Car());
 		Assert.assertEquals(Integer.valueOf(this.totalParkingSpace - 1),
 				this.parkingManager.getAvailableNum());
+	}
+	
+	@Test
+	public void toString_test(){
+	this.parkingManager.parking(new Car());
+	String  expected=
+	"停车场编号：1\n"+
+	"    车位数：20\n"+
+	"    空位数：19\n"+
+	"停车场编号：2\n"+
+	"    车位数：20\n"+
+	"    空位数：20\n"+
+	"停车仔编号：0\n"+
+	"    停车场编号：3\n"+
+	"        车位数：10\n"+
+	"        空位数：10\n"+
+	"    停车场编号：4\n"+
+	"        车位数：10\n"+
+	"        空位数：10\n"+
+	"    Total车位数：20\n"+
+	"    Total空位数：20\n"+
+	"停车仔编号：1\n"+
+	"    停车场编号：5\n"+
+	"        车位数：20\n"+
+	"        空位数：20\n"+
+	"    停车场编号：6\n"+
+	"        车位数：10\n"+
+	"        空位数：10\n"+
+	"    Total车位数：30\n"+
+	"    Total空位数：30\n"+
+	"Total车位数：90\n"+
+	"Total空位数：89\n";
+	Assert.assertEquals("to String wrong", expected,this.parkingManager.toString());
 	}
 
 }

@@ -5,6 +5,8 @@ public class ParkingBoy implements Park {
 
 	protected List<ParkPlace> parkPlaces;
 
+	private int totalParkingSpace = 0;
+
 	public ParkingBoy() {
 		this.parkPlaces = new ArrayList<ParkPlace>();
 	}
@@ -44,4 +46,35 @@ public class ParkingBoy implements Park {
 		throw new NoCarException("没有此车 请拨打110！");
 	}
 
+	/**
+	 * 返回报表
+	 */
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder(
+				this.parkPlaces.size() * 23 + 24);
+
+		int availableParkingSpace = 0;
+
+		for (ParkPlace pp : parkPlaces) {
+			stringBuilder.append(pp.toString());
+			availableParkingSpace += pp.getAvailableNum();
+		}
+
+		stringBuilder.append("Total车位数：").append(this.totalParkingSpace())
+				.append("\n");
+		stringBuilder.append("Total空位数：").append(availableParkingSpace)
+				.append("\n");
+
+		return stringBuilder.toString();
+	}
+
+	public Integer totalParkingSpace() {
+		if (this.totalParkingSpace == 0) {
+			for (ParkPlace pp : parkPlaces) {
+				totalParkingSpace += pp.getTotalParkingSpace();
+			}
+		}
+		return this.totalParkingSpace;
+	}
 }

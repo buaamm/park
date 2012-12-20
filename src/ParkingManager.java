@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,5 +84,55 @@ public class ParkingManager implements Park {
 			}
 		}
 		throw new NoCarException("没有此车 请拨打110！");
+	}
+	
+	final String INDENT = "    ";
+	/**
+	 * 返回报表
+	 */
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		int totalParkingSpace = 0;
+		int availableParkingSpace = 0;
+		for (ParkPlace pp : this.parkPlaces) {
+
+			stringBuilder.append(pp.toString());
+
+			totalParkingSpace += pp.getTotalParkingSpace();
+			availableParkingSpace += pp.getAvailableNum();
+		}
+		int index = 0;
+		for (ParkingBoy pb : this.parkingBoys) {
+
+			totalParkingSpace += pb.totalParkingSpace();
+			availableParkingSpace += pb.getAvailableNum();
+
+			stringBuilder.append("停车仔编号：").append(index++).append("\n");
+			BufferedReader reader = new BufferedReader(new StringReader(
+					pb.toString()));
+
+			try {
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					stringBuilder.append(INDENT).append(line).append("\n");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					reader.close();
+					reader = null;
+				} catch (IOException e) {
+					reader = null;
+				}
+			}
+		}
+		stringBuilder.append("Total车位数：").append(totalParkingSpace)
+				.append("\n");
+		stringBuilder.append("Total空位数：").append(availableParkingSpace)
+				.append("\n");
+
+		return stringBuilder.toString();
 	}
 }
