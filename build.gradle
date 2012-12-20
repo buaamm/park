@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'park', 'Implementation-Version': version
+    }
+}
+archivesBaseName = 'park'
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceSets { 
+	 main { 
+		 java.srcDir "$projectDir/src"
+	 } 
+	 test {
+	      java.srcDir "$projectDir/test"
+	 }
+ } 
+ 
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
+}
